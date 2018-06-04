@@ -30,18 +30,10 @@ app.get('/api/search', (request, response) => {
     })
 })
 
-function checkRedisStore () {
-    return client.get(`wikipedia:${query}`, (error, result) => {
-        if (result) {
-
-        }
-    })
-}
 
 function returnToClient (response, json) {
     return response.status(200).json({ source: 'Wikipedia API', ...json, })
 }
-
 
 function returnFromRedis (result, response) {
     const resultJSON = JSON.parse(result)
