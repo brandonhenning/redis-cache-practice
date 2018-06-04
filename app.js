@@ -13,7 +13,6 @@ const client = redis.createClient()
 app.get('/api/search', (request, response) => {
     const query = (request.query.query).trim()
     const searchURL = `https://en.wikipedia.org/w/api.php?action=parse&format=json&section=0&page=${query}`
-
     return client.get(`wikipedia:${query}`, (error, result) => {
         if (result) {
             returnFromRedis(result, response)
