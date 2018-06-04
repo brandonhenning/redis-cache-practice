@@ -2,6 +2,7 @@ const express = require('express')
 const responseTime = require('response-time')
 const axios = require('axios')
 const redis = require('redis')
+const port = process.env.PORT || 3000
 const app = express()
 
 // Create and connect redis client to local instance
@@ -60,6 +61,4 @@ function saveToRedis (query, json) {
     client.setex(`wikipedia:${query}`, 3600, JSON.stringify({ source: 'Redis Cache', ...json}))
 }
 
-app.listen(3000, () => {
-    console.log('Server listening on port: ', 3000)
-})
+app.listen(port)
